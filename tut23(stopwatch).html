@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 25px;
+    width: 78px;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+        h4,h1{
+            margin-left: 100px;
+            color: aliceblue;
+            font-size: 30px;
+        }
+        .btn{
+            
+            height: 34px;
+            width: 95px;
+            margin-left: 10px;
+            color: aliceblue;
+            font-weight: 900;
+        }
+     
+       
+      div{
+        display: block;
+        margin: auto;
+        background-image: url("https://media.istockphoto.com/id/1177151633/vector/hud-time.jpg?s=612x612&w=0&k=20&c=Vs4dQxRJtMgLpeHBh2oGKYNZq_H5YilPqLN6Htfccfw=");
+        background-repeat: no-repeat;
+        opacity:0.9;
+        height: 250px;
+        width: 340px;
+        border: 1px solid black;
+        border-radius: 5px;
+      
+       
+      }
+    </style>
+</head>
+
+<body>
+    <div> 
+
+        <h1>Stop Watch</h1>
+        
+        <h4 id="displaytime">00:00:00</h4>
+        <button id="stop" class="btn" onclick="stop()" ><img src="https://cdn.pixabay.com/photo/2013/07/13/10/12/icon-156758__340.png">Stop</button>
+        <button id="play" class="btn" onclick="watchstart()"> <img src="https://cdn.pixabay.com/photo/2016/06/01/00/43/black-power-button-1428134__340.png">Start</button>
+        <button id="restart" class="btn" onclick="reset()"> <img src="https://cdn.pixabay.com/photo/2016/12/04/18/58/instagram-1882329__340.png">reset</button>
+      
+</div>
+    <script>
+        let [sec, min, hour] = [0, 0, 0];
+
+
+        var displaytime = document.getElementById("displaytime");
+        let timer = null;
+
+
+
+        function watchstart() {
+                    if (timer !== null) {
+                clearInterval(timer)
+            }
+            timer = setInterval(start, 1000);
+        }
+
+        function start() {
+            sec++;
+            if (sec == 60) {
+                sec = 0;
+                min++;
+                if (min == 60) {
+                    min = 0;
+                    hour++;
+                }
+            }
+            let h = hour < 10 ? "0" + hour : hour;
+            let m = min < 10 ? "0" + min : min;
+            let s = sec < 10 ? "0" + sec : sec;
+            displaytime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        function  stop(){
+            clearInterval(timer);
+        }
+
+        function reset(){
+            clearInterval(timer);
+            [hour,min,sec]=[0,0,0];
+            displaytime.innerHTML="00:00:00";
+        }
+
+
+    </script>
+</body>
+
+</html>
